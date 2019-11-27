@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {View, FlatList, Dimensions} from 'react-native';
+import {View, FlatList} from 'react-native';
 import PropTypes from 'prop-types';
 import QuestionItem from './QuestionItem';
 import {DataTable} from 'react-native-paper';
 
 
-const scr = Dimensions.get('window').width;
 class QuestionList extends Component {
 
     static propTypes = {
@@ -25,7 +24,7 @@ class QuestionList extends Component {
             </DataTable.Header>
             <DataTable.Header>
                 <DataTable.Title>Question</DataTable.Title>
-                <DataTable.Title style={{flexDirection: 'row', justifyContent: 'flex-end'}}> Avg star</DataTable.Title>
+                <DataTable.Title style={{justifyContent: 'flex-end'}}> Avg star</DataTable.Title>
             </DataTable.Header>
           </DataTable>
           <FlatList

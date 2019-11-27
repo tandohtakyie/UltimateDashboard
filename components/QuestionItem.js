@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import {DataTable} from 'react-native-paper';
 
+
 class QuestionItem extends React.Component {
   static propTypes = {
     feedback: PropTypes.object.isRequired,
@@ -16,11 +17,11 @@ class QuestionItem extends React.Component {
       <View>
         <DataTable>
             <DataTable.Row>
-              <DataTable.Cell style={{paddingBottom: 20, width: 400}}>
+              <DataTable.Cell style={{flex: 11, paddingBottom: 20, flexWrap: 'wrap'}}>
                 {feedback.question}
               </DataTable.Cell>
               <DataTable.Cell
-                style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+                style={{flex: 1, justifyContent: 'flex-end'}}>
                 {feedback.avg}
               </DataTable.Cell>
             </DataTable.Row>

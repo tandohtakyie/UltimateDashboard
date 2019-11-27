@@ -5,15 +5,15 @@ import ajax from "../ajax";
 import StatusBarAdjust from "../components/StatusBarAdjust";
 import QuestionList from "../components/QuestionList";
 
+let pickerValue = "";
+let picked = false;
 class QuestionScreen extends Component {
   state = {
     questions: [],
     questionsFormFilter: [],
-    currentFeedbackId: null,
     dataSource: [],
     loading: false,
     refreshing: false,
-    isFeedbackClick: false,
     isPickerLoading: true,
     pickerValueHolder: "",
     justPicked: false
@@ -22,7 +22,7 @@ class QuestionScreen extends Component {
   
   _getFeedbackAppNames = async () => {
     const apiHost = await ajax.getApiHost();
-    return fetch(apiHost + "/get/apps")
+    return fetch(apiHost + "/get/appsWithQuestions")
       .then(response => response.json())
       .then(responseJson => {
         this.setState(
@@ -40,9 +40,11 @@ class QuestionScreen extends Component {
   
   _filterFeedbacks = async () => {
     console.log("Filtering");
+    pickerValue = this.state.pickerValueHolder;
+    console.log(pickerValue);
 
-    const pickerValue = this.state.pickerValueHolder;
     let questionsFormFilter = [];
+
     if (pickerValue !== "Choose An App") {
       questionsFormFilter = await ajax.getQuestionsAndAvg(pickerValue);
     }
@@ -59,12 +61,13 @@ class QuestionScreen extends Component {
   componentWillUpdate() {
     console.log("Inside WillUpdate");
 
-    const picked = this.state.justPicked;
+    picked = this.state.justPicked;
     console.log(picked);
 
-      if (picked){
-        this._filterFeedbacks();
-        console.log("Inside if");
+    if (picked){
+
+      this._filterFeedbacks();
+      console.log("Inside if");
     }  
   }  
   
