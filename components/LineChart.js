@@ -19,7 +19,7 @@ class LineChart extends React.PureComponent {
 
   render() {
     const feedbacksCount = this.props.feedbacksPerYear;
-    console.log("fPerYear" + feedbacksCount);
+    //console.log("fPerYear" + feedbacksCount);
 
     return (
       <View>

@@ -6,6 +6,7 @@ export default {
   getApiHost() {
     return apiHost.toString();
   },
+
   async getAllFeedbacks() {
     try {
       const response = await fetch(apiHost + "/get/time/desc");
@@ -54,5 +55,16 @@ export default {
     } catch (error) {
       console.error(error);
     }
-  }
+  },
+
+  async getQuestionsAndAvg(app) {
+    try {
+      const response = await fetch(apiHost + '/getAvgRatingPerQuestPerApp/' + app);
+      const responseJson = await response.json();
+      return responseJson;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
 };

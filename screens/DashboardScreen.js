@@ -78,8 +78,8 @@ class DashboardScreen extends Component {
   render() {
     const feedbacksPerYear = this.state.feedbacksPerYear;
     const os = this.state.os;
-    console.log("osDashboardscreen: " + os);
-    console.log("feedbackPerYear: " + feedbacksPerYear);
+    //console.log("osDashboardscreen: " + os);
+    //console.log("feedbackPerYear: " + feedbacksPerYear);
     const smileyRange = this.state.smileys;
 
     return (

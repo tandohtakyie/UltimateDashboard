@@ -5,6 +5,10 @@ export default StyleSheet.create({
     backgroundColor: "#1d2637",
     height: "100%"
   },
+  questionContainer: {
+    backgroundColor: "#fff",
+    height: "100%"
+  },
   ptb10: {
     marginVertical: 10
   },
@@ -108,6 +112,6 @@ export default StyleSheet.create({
   filterDropdown: {
     color: "#fff",
     backgroundColor: "#181f2d",
-    height: 40
+    height: 40,
   }
 });

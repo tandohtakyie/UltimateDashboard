@@ -4,11 +4,11 @@ import { BottomNavigation } from "react-native-paper";
 
 import DashboardScreen from "./screens/DashboardScreen";
 import FeedbackListScreen from "./screens/FeedbackListScreen";
-import TextAnalytics from "./screens/TextAnalytics";
+import QuestionScreen from "./screens/QuestionScreen";
 
 const DashboardRoute = () => <DashboardScreen />;
 const FeedbackRoute = () => <FeedbackListScreen />;
-const TextAnalyticsRoute = () => <TextAnalytics />;
+const QuestionsRoute = () => <QuestionScreen />;
 
 export default class App extends React.Component {
   state = {
@@ -27,8 +27,8 @@ export default class App extends React.Component {
         color: "#181f2d"
       },
       {
-        key: "textAnalytics",
-        title: "Analytics",
+        key: "questions",
+        title: "Questions",
         icon: "format-text-rotation-none",
         color: "#181f2d"
       }
@@ -40,7 +40,7 @@ export default class App extends React.Component {
   _renderScene = BottomNavigation.SceneMap({
     dashboard: DashboardRoute,
     feedbackList: FeedbackRoute,
-    textAnalytics: TextAnalyticsRoute
+    questions: QuestionsRoute
   });
 
   render() {
