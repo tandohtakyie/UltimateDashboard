@@ -78,7 +78,6 @@ class DashboardScreen extends Component {
   render() {
     const feedbacksPerYear = this.state.feedbacksPerYear;
     const os = this.state.os;
-    console.log("osDashboardscreen: " + os);
     console.log("feedbackPerYear: " + feedbacksPerYear);
     const smileyRange = this.state.smileys;
 
@@ -98,10 +97,16 @@ class DashboardScreen extends Component {
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold]}>
                 Feedback amount this year
-              </Text>
-              <View>
-                <LineChart feedbacksPerYear={feedbacksPerYear} />
-              </View>
+              </Text>         
+              {this.state.feedbacksPerYear.length > 0 ? (   
+                <LineChart 
+                feedbacksPerYear={feedbacksPerYear} 
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh} 
+                />
+              ) : (
+                <Text>No data to display</Text>
+              )}
             </View>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
@@ -118,7 +123,7 @@ class DashboardScreen extends Component {
                 Satisfaction index
               </Text>
               {this.state.smileys.length > 0 ? (
-                <Text>PieChartWithClickSlices will come here</Text>
+                <Text>No data available</Text>
               ) : (
                 <Text style={styles.text_white_opacity}>No data available</Text>
               )}
