@@ -5,6 +5,9 @@ import StatusBarAdjust from "../components/StatusBarAdjust";
 import ajax from "../ajax";
 import styles from "../style";
 import Smiley from "../components/Smiley";
+import { Button } from "react-native-paper";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 class FeedbackDetails extends Component {
   static propTypes = {
@@ -92,6 +95,28 @@ class FeedbackDetails extends Component {
                   </Text>
                 </Text>
               </View>
+            </View>
+            <View>
+              <TouchableHighlight
+                onPress={() => console.log("delete pressed!")}
+              >
+                <View style={[styles.btnDelete]}>
+                  <Ionicons
+                    style={styles.text_white}
+                    name="md-trash"
+                    size={30}
+                  />
+                  <Text
+                    style={[
+                      styles.text_white,
+                      styles.btnDeleteTextSize,
+                      styles.btnDeletePos
+                    ]}
+                  >
+                    Delete
+                  </Text>
+                </View>
+              </TouchableHighlight>
             </View>
           </View>
         </ScrollView>
