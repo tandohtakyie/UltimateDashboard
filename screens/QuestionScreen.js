@@ -55,20 +55,22 @@ class QuestionScreen extends Component {
   
   componentDidMount() {
     this._getFeedbackAppNames();
-    this._filterFeedbacks();
+
+    picked = this.state.justPicked;
+    //console.log(picked);
+
+    if (picked){
+      this._filterFeedbacks();
+      //console.log("Inside if");
+    }  
   }
   
   componentWillUpdate() {
-    console.log("Inside WillUpdate");
+    //console.log("Inside WillUpdate");
 
-    picked = this.state.justPicked;
-    console.log(picked);
+    this.componentDidMount();
 
-    if (picked){
 
-      this._filterFeedbacks();
-      console.log("Inside if");
-    }  
   }  
   
   render() {
