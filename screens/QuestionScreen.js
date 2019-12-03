@@ -47,7 +47,7 @@ class QuestionScreen extends Component {
 
     let questionsFormFilter = [];
 
-    if (pickerValue !== "Choose An App") {
+    if (pickerValue !== "Choose App") {
       questionsFormFilter = await ajax.getQuestionsAndAvg(pickerValue);
     }
     this.setState({ questionsFormFilter });
@@ -82,7 +82,7 @@ class QuestionScreen extends Component {
               <View>
                 <View style={styles.ptb10}>
                   <Text style={[styles.text_white, styles.text_h2]}>
-                    Average star rating per question
+                    Avg. stars per question
                   </Text>
                 </View>
                 <View style={[styles.mtb25, { justifyContent: "flex-end" }]}>
@@ -108,7 +108,7 @@ class QuestionScreen extends Component {
                         picked = true
                       }}
                     >
-                      <Picker.Item label="Choose An App" value="0" />
+                      <Picker.Item label="Choose App" value="0" />
                       {this.state.dataSource.map((item, key) => {
                         return (
                           <Picker.Item
@@ -140,7 +140,7 @@ class QuestionScreen extends Component {
                   <View>
                     <View style={styles.ptb10}>
                       <Text style={[styles.text_white, styles.text_h2]}>
-                        Average star rating per question
+                        Avg. stars per question
                       </Text>
                     </View>
                     <View style={[styles.mtb25, { justifyContent: "flex-end" }]}>
@@ -167,7 +167,7 @@ class QuestionScreen extends Component {
                           }
                           }
                         >
-                          <Picker.Item label="Choose An App" value="0" />
+                          <Picker.Item label="Choose App" value="0" />
                           {this.state.dataSource.map((item, key) => {
                             return (
                               <Picker.Item

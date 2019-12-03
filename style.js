@@ -109,9 +109,10 @@ export default StyleSheet.create({
     marginLeft: 5
   },
   btn_trash: {},
+
   filterDropdown: {
     color: "#fff",
-    backgroundColor: "#181f2d",
+    backgroundColor: "#33415f",
     height: 40,
   }
 });

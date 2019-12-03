@@ -27,8 +27,8 @@ class TAappSmileys extends React.PureComponent {
     const { data } = this.state;
     //console.log(data);
 
-    const app = data.map((key, index) => key.app);
-    const avg = data.map((key, index) => key.avg);
+    const app = data.map((key, index) => key.x);
+    const avg = data.map((key, index) => key.y);
     const yax = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     for (let i = 0; i < app.length; i++) {

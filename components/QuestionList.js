@@ -20,7 +20,7 @@ class QuestionList extends Component {
         <View style={{ backgroundColor: "#fff" }}>
           <DataTable>
             <DataTable.Header>
-            <DataTable.Title style={{justifyContent: 'center'}}>{this.props.appName}</DataTable.Title>
+            <DataTable.Title style={{justifyContent: 'center', backgroundColor: '#8f9db3'}}>{this.props.appName}</DataTable.Title>
             </DataTable.Header>
             <DataTable.Header>
                 <DataTable.Title>Question</DataTable.Title>
@@ -28,7 +28,7 @@ class QuestionList extends Component {
             </DataTable.Header>
           </DataTable>
           <FlatList
-            style={{marginBottom: 53 }}
+            style={{marginBottom: 10 }}
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
             data={this.props.feedbacks}
