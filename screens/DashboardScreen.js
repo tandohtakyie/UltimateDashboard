@@ -145,7 +145,7 @@ class DashboardScreen extends Component {
                 >
                   Category distribution
                 </Text>
-                <TACatDistr />
+              {/* <TACatDistr /> */}
               </View>
             </View>
           </View>

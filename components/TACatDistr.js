@@ -25,10 +25,17 @@ class TACatDistr extends React.PureComponent {
 
   render() {
     const { data } = this.state;
+    console.log("Data in CatDistr" + data)
 
     const feedb = data.map((key, index) => key.feedback);
+    console.log("Data in feedb" + feedb)
+
     const sugg = data.map((key, index) => key.suggestion);
+    console.log("Data in sugg" + sugg)
+
     const bugr = data.map((key, index) => key.bugreport);
+    console.log("Data in bugr" + bugr)
+
 
     // calculate total count and then percentages
     const max = parseInt(feedb) + parseInt(sugg) + parseInt(bugr);
@@ -39,6 +46,7 @@ class TACatDistr extends React.PureComponent {
     return (
       <View style={{ width: scr, position: "relative" }}>
         <View style={{ width: scr * 0.85, marginLeft: -10 }}>
+        {data.length !== 0 ? (
           <VictoryPie
             data={[
               { x: " ", y: feedb[0] },
@@ -50,6 +58,9 @@ class TACatDistr extends React.PureComponent {
             labelRadius={100}
             colorScale={["turquoise", "lightgray", "#cc99ff"]}
           />
+          ) : (
+            <Text> No data to display </Text>
+          )}
         </View>
         <View
           style={{
