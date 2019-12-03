@@ -7,6 +7,7 @@ import QuestionList from "../components/QuestionList";
 
 let pickerValue = "";
 let picked = false;
+
 class QuestionScreen extends Component {
   state = {
     questions: [],
@@ -16,7 +17,6 @@ class QuestionScreen extends Component {
     refreshing: false,
     isPickerLoading: true,
     pickerValueHolder: "",
-    justPicked: false
   };  
   
   
@@ -39,9 +39,11 @@ class QuestionScreen extends Component {
   };  
   
   _filterFeedbacks = async () => {
-    console.log("Filtering");
+    //console.log("Filtering");
+    //console.log("Picked in filter: "+ picked);
+
     pickerValue = this.state.pickerValueHolder;
-    console.log(pickerValue);
+    //console.log(pickerValue);
 
     let questionsFormFilter = [];
 
@@ -49,30 +51,25 @@ class QuestionScreen extends Component {
       questionsFormFilter = await ajax.getQuestionsAndAvg(pickerValue);
     }
     this.setState({ questionsFormFilter });
-    this.setState({ justPicked: false})
+    //this.setState({ justPicked: false});
+    picked = false;
 
   };  
   
   componentDidMount() {
     this._getFeedbackAppNames();
-
-    picked = this.state.justPicked;
-    //console.log(picked);
-
-    if (picked){
-      this._filterFeedbacks();
-      //console.log("Inside if");
-    }  
   }
   
-  componentWillUpdate() {
-    //console.log("Inside WillUpdate");
+  componentDidUpdate() {
+    //console.log("Inside DidUpdate");
+    //console.log("Picked in didUpdate: " + picked);
 
-    this.componentDidMount();
+    if (picked == true){
+      this._filterFeedbacks();
+    }
 
+  }
 
-  }  
-  
   render() {
     const questionsToDisplay = this.state.questionsFormFilter;
     const appname = this.state.pickerValueHolder;
@@ -105,11 +102,11 @@ class QuestionScreen extends Component {
                       mode="dropdown"
                       style={[styles.filterDropdown, styles.pos_rel]}
                       selectedValue={this.state.pickerValueHolder}
-                      onValueChange={(itemValue, itemIndex) =>
+                      onValueChange={(itemValue, itemIndex) => {
                         this.setState({ 
-                          pickerValueHolder: itemValue,
-                          justPicked : true })
-                      }
+                          pickerValueHolder: itemValue}),
+                        picked = true
+                      }}
                     >
                       <Picker.Item label="Choose An App" value="0" />
                       {this.state.dataSource.map((item, key) => {
@@ -163,10 +160,11 @@ class QuestionScreen extends Component {
                           mode="dropdown"
                           style={[styles.filterDropdown, styles.pos_rel]}
                           selectedValue={this.state.pickerValueHolder}
-                          onValueChange={(itemValue, itemIndex) =>
+                          onValueChange={(itemValue, itemIndex) => {
                             this.setState({ 
-                              pickerValueHolder: itemValue,
-                              justPicked : true })
+                              pickerValueHolder: itemValue}),
+                            picked = true
+                          }
                           }
                         >
                           <Picker.Item label="Choose An App" value="0" />
