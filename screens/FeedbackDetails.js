@@ -61,7 +61,7 @@ class FeedbackDetails extends Component {
                   User's mood rate : {feedback.smiley}
                 </Text>
                 <View style={styles.smiley_icon_position}>
-                  <Smiley userInput={feedback.smiley} />
+                  <Smiley userInput={feedback.rating} />
                 </View>
               </View>
               <View style={[styles.hr, styles.mt15]} />

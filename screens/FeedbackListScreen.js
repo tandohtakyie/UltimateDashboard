@@ -53,7 +53,7 @@ class FeedbackListScreen extends Component {
 
   _getFeedbackAppNames = async () => {
     const apiHost = ajax.getApiHost();
-    return fetch(apiHost + "/get/apps")
+    return fetch(apiHost + "/get/appsWithFeedback")
       .then(response => response.json())
       .then(responseJson => {
         this.setState(
