@@ -5,7 +5,7 @@ import styles from "../style";
 import Bar from "../components/Bar";
 import PieChartWithClickSlices from "../components/PieChartWithClickSlices";
 import TACatDistr from "../components/TACatDistr";
-import TAappSmileys from "../components/TAappsSmileys";
+import TAappsSmileysVictory from "../components/TAappsSmileysVictory";
 import LineChart from "../components/LineChart";
 import ajax from "../ajax";
 
@@ -18,17 +18,32 @@ class DashboardScreen extends Component {
     os: [],
     loading: false,
     smileys: [],
-    refreshing: false
+    refreshing: false,
+    avgPerApp: [],
   };
 
   componentDidMount() {
     this._getFeedbackAmountPerYear();
     this._getOsAmount();
     this._getSmileyRangeAmount();
+    this._getAvgPerApp();
   }
 
+  _getAvgPerApp = async () => {
+    await fetch(ajax.getApiHost() + "/getAvgPerApp", { method: "GET" })
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState({
+          avgPerApp: responseJson
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   _getFeedbackAmountPerYear = async () => {
-    fetch(apiHost + "/feedbacks/year", { method: "GET" })
+    await fetch(apiHost + "/feedbacks/year", { method: "GET" })
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
@@ -41,7 +56,7 @@ class DashboardScreen extends Component {
   };
 
   _getOsAmount = async () => {
-    fetch(apiHost + "/os2/android+ios", { method: "GET" })
+    await fetch(apiHost + "/os2/android+ios", { method: "GET" })
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
@@ -54,7 +69,7 @@ class DashboardScreen extends Component {
   };
 
   _getSmileyRangeAmount = async () => {
-    fetch(apiHost + "/linecount/smiley", { method: "GET" })
+    await fetch(apiHost + "/linecount/smiley", { method: "GET" })
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
@@ -70,6 +85,7 @@ class DashboardScreen extends Component {
     this.setState({ refreshing: true });
     this._getOsAmount();
     this._getSmileyRangeAmount();
+    this._getAvgPerApp();
     this._getFeedbackAmountPerYear().then(() => {
       this.setState({ refreshing: false });
     });
@@ -79,6 +95,7 @@ class DashboardScreen extends Component {
     const feedbacksPerYear = this.state.feedbacksPerYear;
     const os = this.state.os;
     const smileyRange = this.state.smileys;
+    const avgPerAppData = this.state.avgPerApp;
 
     return (
       <View style={[styles.container]}>
@@ -97,35 +114,31 @@ class DashboardScreen extends Component {
               <Text style={[styles.text_white, styles.text_bold]}>
                 Feedback amount this year
               </Text>         
-              {this.state.feedbacksPerYear.length > 0 ? (   
                 <LineChart 
                 feedbacksPerYear={feedbacksPerYear} 
                 onListRefresh={this.state.refreshing}
                 onPullDownRefresh={this.handleRefresh} 
                 />
-              ) : (
-                <Text>No data to display</Text>
-              )}
             </View>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
                 OS distribution
               </Text>
-              {this.state.os.length > 0 ? (
-                <Bar os={os} />
-              ) : (
-                <Text style={styles.text_white_opacity}>No data available</Text>
-              )}
+                <Bar 
+                os={os}
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh}
+                />
             </View>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_bold, styles.text_white]}>
                 Satisfaction index
               </Text>
-              {this.state.smileys.length > 0 ? (
-                <PieChartWithClickSlices smileys={smileyRange} />
-              ) : (
-                <Text style={styles.text_white_opacity}>No data available</Text>
-              )}
+                <PieChartWithClickSlices 
+                smileys={smileyRange} 
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh}
+                />
             </View>
             <View style={styles.panel_Dashboard}>
               <View>
@@ -134,7 +147,9 @@ class DashboardScreen extends Component {
                 >
                   Average rating per app
                 </Text>
-                <TAappSmileys />
+                <TAappsSmileysVictory 
+                  avgPerAppCount={avgPerAppData}
+                />
               </View>
             </View>
             <View style={styles.panel_Dashboard}>

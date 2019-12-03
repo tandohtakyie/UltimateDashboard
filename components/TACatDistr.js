@@ -25,16 +25,9 @@ class TACatDistr extends React.PureComponent {
 
   render() {
     const { data } = this.state;
-    console.log("Data in CatDistr" + data)
-
     const feedb = data.map((key, index) => key.feedback);
-    console.log("Data in feedb" + feedb)
-
     const sugg = data.map((key, index) => key.suggestion);
-    console.log("Data in sugg" + sugg)
-
     const bugr = data.map((key, index) => key.bugreport);
-    console.log("Data in bugr" + bugr)
 
 
     // calculate total count and then percentages
