@@ -78,7 +78,6 @@ class DashboardScreen extends Component {
   render() {
     const feedbacksPerYear = this.state.feedbacksPerYear;
     const os = this.state.os;
-    console.log("feedbackPerYear: " + feedbacksPerYear);
     const smileyRange = this.state.smileys;
 
     return (
@@ -123,7 +122,7 @@ class DashboardScreen extends Component {
                 Satisfaction index
               </Text>
               {this.state.smileys.length > 0 ? (
-                <Text>No data available</Text>
+                <PieChartWithClickSlices smileys={smileyRange} />
               ) : (
                 <Text style={styles.text_white_opacity}>No data available</Text>
               )}
@@ -145,7 +144,7 @@ class DashboardScreen extends Component {
                 >
                   Category distribution
                 </Text>
-              {/* <TACatDistr /> */}
+              <TACatDistr /> 
               </View>
             </View>
           </View>

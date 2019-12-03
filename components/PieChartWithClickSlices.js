@@ -68,28 +68,6 @@ class PieChartWithClickSlices extends React.PureComponent {
     });
     const deviceWidth = Dimensions.get("window").width;
 
-    const Labels = ({ slices, height, width }) => {
-      return slices.map((slice, index) => {
-        const { labelCentroid, pieCentroid, data } = slice;
-        return (
-          <Text
-            style={{ color: "#fff" }}
-            key={index}
-            x={pieCentroid[0]}
-            y={pieCentroid[1]}
-            fill={"white"}
-            textAnchor={"middle"}
-            alignmentBaseline={"middle"}
-            fontSize={8}
-            stroke={"white"}
-            strokeWidth={0.2}
-          >
-            {data.SmileyRange}
-          </Text>
-        );
-      });
-    };
-
     return (
       <View style={{ justifyContent: "center", flex: 1, position: "relative" }}>
         <PieChart
