@@ -19,11 +19,19 @@ class TAappsSmileysVictory extends React.PureComponent {
 
     return(
     <View style={{ flex: 1 }}>
+        <VictoryChart
+        theme={VictoryTheme.material}
+        domain={{ x: [0, 4] }}
+        >
         {avgPerAppData.length !== 0 ? (
                     <VictoryBar
+                        barWidth={({ index }) => index * 2 + 75}
                         style={{
                             data: {
-                            fill: "rgb(134, 65, 244)"
+                            fill: "rgb(134, 65, 244)",
+                            stroke: "#000000",
+                            fillOpacity: 0.7,
+                            strokeWidth: 3
                             }
                         }}
                         data={avgPerAppData}
@@ -31,6 +39,7 @@ class TAappsSmileysVictory extends React.PureComponent {
         ) : (
             <Text> No data to display </Text>
         )}
+        </VictoryChart>
     </View>
     )
     }
