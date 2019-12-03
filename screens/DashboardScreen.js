@@ -107,21 +107,21 @@ class DashboardScreen extends Component {
               <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
                 OS distribution
               </Text>
-              {this.state.os.length > 0 ? (
+              {/* {this.state.os.length > 0 ? (
                 <Bar os={os} />
               ) : (
                 <Text style={styles.text_white_opacity}>No data available</Text>
-              )}
+              )} */}
             </View>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_bold, styles.text_white]}>
                 Satisfaction index
               </Text>
-              {this.state.smileys.length > 0 ? (
+              {/* {this.state.smileys.length > 0 ? (
                 <Text>PieChartWithClickSlices will come here</Text>
               ) : (
                 <Text style={styles.text_white_opacity}>No data available</Text>
-              )}
+              )} */}
             </View>
             <View style={styles.panel_Dashboard}>
               <View>
@@ -130,7 +130,7 @@ class DashboardScreen extends Component {
                 >
                   Average rating per app
                 </Text>
-                <TAappSmileys />
+                {/* <TAappSmileys /> */}
               </View>
             </View>
             <View style={styles.panel_Dashboard}>
@@ -140,7 +140,7 @@ class DashboardScreen extends Component {
                 >
                   Category distribution
                 </Text>
-                <TACatDistr />
+                {/* <TACatDistr /> */}
               </View>
             </View>
           </View>
