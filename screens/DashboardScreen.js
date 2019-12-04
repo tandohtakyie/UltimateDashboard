@@ -3,7 +3,6 @@ import { View, Text, ScrollView, RefreshControl } from "react-native";
 import StatusBarAdjust from "../components/StatusBarAdjust";
 import styles from "../style";
 import Bar from "../components/Bar";
-import PieChartWithClickSlices from "../components/PieChartWithClickSlices";
 import TACatDistr from "../components/TACatDistr";
 import TAappsSmileysVictory from "../components/TAappsSmileysVictory";
 import LineChart from "../components/LineChart";
@@ -134,11 +133,11 @@ class DashboardScreen extends Component {
               <Text style={[styles.text_bold, styles.text_white]}>
                 Satisfaction index
               </Text>
-                <PieChartWithClickSlices 
+                { /* <PieChartWithClickSlices 
                 smileys={smileyRange} 
                 onListRefresh={this.state.refreshing}
                 onPullDownRefresh={this.handleRefresh}
-                />
+                /> */}
             </View>
             <View style={styles.panel_Dashboard}>
               <View>

@@ -5,7 +5,8 @@ import {
   VictoryTheme,
   VictoryVoronoiContainer,
   VictoryScatter,
-  VictoryTooltip
+  VictoryTooltip,
+  VictoryLabel
 } from "victory-native";
 import { PropTypes } from "prop-types";
 import { Text, View } from "react-native";
