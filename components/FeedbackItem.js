@@ -23,7 +23,7 @@ class FeedbackItem extends Component {
     this.props.onPress(this.props.feedback.id);
   };
   handleDeletePress = () => {
-    console.log("id: " + this.props.feedbackID);
+    //console.log("id: " + this.props.feedbackID);
   };
 
   checkOs = osText => {

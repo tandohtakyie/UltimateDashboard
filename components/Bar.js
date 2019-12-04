@@ -19,8 +19,11 @@ class Bar extends React.PureComponent {
 
   render() {
     const osCount = this.props.os;
-    const osAndroid = osCount.map((item, index) => {return item.android});
-    const osIos = osCount.map((item, index) => {return item.ios});
+    //console.log("osCount : " + osCount);
+    const osAndroid = osCount.map((item, index) => item.android);
+    //console.log("android : " + osAndroid);
+    const osIos = osCount.map((item, index) => item.ios);
+    //console.log("ios : " + osIos);
 
     return (
       <View>
