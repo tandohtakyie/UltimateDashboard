@@ -14,6 +14,9 @@ import ajax from "../ajax";
 import FeedbackList from "../components/FeedbackList";
 import FeedbackDetails from "./FeedbackDetails";
 
+
+let picked = false;
+
 class FeedbackListScreen extends Component {
   state = {
     feedbacks: [],
@@ -53,7 +56,7 @@ class FeedbackListScreen extends Component {
 
   _getFeedbackAppNames = async () => {
     const apiHost = ajax.getApiHost();
-    return fetch(apiHost + "/get/apps")
+    return fetch(apiHost + "/get/appsWithFeedback")
       .then(response => response.json())
       .then(responseJson => {
         this.setState(
@@ -83,6 +86,7 @@ class FeedbackListScreen extends Component {
       feedbackFormFilter = await ajax.fetchFeedbacksFilteredResult(pickerValue);
     }
     this.setState({ feedbackFormFilter });
+    picked = false;
   };
 
   componentDidMount() {
@@ -95,7 +99,9 @@ class FeedbackListScreen extends Component {
     );
   }
   componentWillUpdate() {
-    this._filterFeedbacks();
+    if(picked == true){
+      this._filterFeedbacks();
+    }
   }
 
   render() {
@@ -140,8 +146,10 @@ class FeedbackListScreen extends Component {
                     mode="dropdown"
                     style={[styles.filterDropdown, styles.pos_rel]}
                     selectedValue={this.state.pickerValueHolder}
-                    onValueChange={(itemValue, itemIndex) =>
-                      this.setState({ pickerValueHolder: itemValue })
+                    onValueChange={(itemValue, itemIndex) =>{
+                      this.setState({ pickerValueHolder: itemValue }),
+                      picked = true
+                    }
                     }
                   >
                     <Picker.Item label="All" value="0" />

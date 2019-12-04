@@ -104,7 +104,20 @@ export default StyleSheet.create({
     paddingHorizontal: 30,
     marginLeft: 5
   },
-  btn_trash: {},
+  btnDelete: {
+    flexDirection: "row",
+    backgroundColor: "#fb3d57",
+    justifyContent: "center",
+    paddingVertical: 10,
+    borderRadius: 10
+  },
+  btnDeleteTextSize: {
+    fontSize: 14
+  },
+  btnDeletePos: {
+    marginTop: 5,
+    marginHorizontal: 10
+  },
   filterDropdown: {
     color: "#fff",
     backgroundColor: "#181f2d",

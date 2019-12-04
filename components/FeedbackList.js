@@ -14,9 +14,8 @@ class FeedbackList extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{ marginBottom: 75 }}>
         <FlatList
-          style={{ marginBottom: 53 }}
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
           data={this.props.feedbacks}

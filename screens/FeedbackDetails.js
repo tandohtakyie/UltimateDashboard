@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView, Platform } from "react-native";
+import { View, Text, ScrollView, Platform, Alert } from "react-native";
 import PropTypes from "prop-types";
 import StatusBarAdjust from "../components/StatusBarAdjust";
 import ajax from "../ajax";
 import styles from "../style";
 import Smiley from "../components/Smiley";
+import { Button } from "react-native-paper";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 class FeedbackDetails extends Component {
   static propTypes = {
@@ -20,6 +23,8 @@ class FeedbackDetails extends Component {
       FeedbackDetail: fullFeedback
     });
   }
+
+  handleDeleteFeedback = () => {};
 
   render() {
     const { feedback } = this.state;
@@ -58,7 +63,7 @@ class FeedbackDetails extends Component {
                   User's mood rate : {feedback.smiley}
                 </Text>
                 <View style={styles.smiley_icon_position}>
-                  <Smiley userInput={feedback.smiley} />
+                  <Smiley userInput={feedback.rating} />
                 </View>
               </View>
               <View style={[styles.hr, styles.mt15]} />
@@ -92,6 +97,41 @@ class FeedbackDetails extends Component {
                   </Text>
                 </Text>
               </View>
+            </View>
+            <View>
+              <TouchableHighlight
+                onPress={() =>
+                  Alert.alert(
+                    "Delete",
+                    "Feedback will be achived. Proceed?",
+                    [
+                      {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed!")
+                      },
+                      { text: "Yes", onPress: () => this.handleDeleteFeedback }
+                    ],
+                    { cancelable: false }
+                  )
+                }
+              >
+                <View style={[styles.btnDelete]}>
+                  <Ionicons
+                    style={styles.text_white}
+                    name="md-trash"
+                    size={30}
+                  />
+                  <Text
+                    style={[
+                      styles.text_white,
+                      styles.btnDeleteTextSize,
+                      styles.btnDeletePos
+                    ]}
+                  >
+                    Delete
+                  </Text>
+                </View>
+              </TouchableHighlight>
             </View>
           </View>
         </ScrollView>
