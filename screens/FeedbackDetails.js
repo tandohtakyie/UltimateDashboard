@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView, Platform } from "react-native";
+import { View, Text, ScrollView, Platform, Alert } from "react-native";
 import PropTypes from "prop-types";
 import StatusBarAdjust from "../components/StatusBarAdjust";
 import ajax from "../ajax";
@@ -23,6 +23,8 @@ class FeedbackDetails extends Component {
       FeedbackDetail: fullFeedback
     });
   }
+
+  handleDeleteFeedback = () => {};
 
   render() {
     const { feedback } = this.state;
@@ -98,7 +100,20 @@ class FeedbackDetails extends Component {
             </View>
             <View>
               <TouchableHighlight
-                onPress={() => console.log("delete pressed!")}
+                onPress={() =>
+                  Alert.alert(
+                    "Delete",
+                    "Feedback will be achived. Proceed?",
+                    [
+                      {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed!")
+                      },
+                      { text: "Yes", onPress: () => this.handleDeleteFeedback }
+                    ],
+                    { cancelable: false }
+                  )
+                }
               >
                 <View style={[styles.btnDelete]}>
                   <Ionicons
