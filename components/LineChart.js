@@ -5,7 +5,8 @@ import {
   VictoryTheme,
   VictoryVoronoiContainer,
   VictoryScatter,
-  VictoryTooltip
+  VictoryTooltip,
+  VictoryLabel
 } from "victory-native";
 import { PropTypes } from "prop-types";
 import { Text, View } from "react-native";
@@ -19,7 +20,6 @@ class LineChart extends React.PureComponent {
 
   render() {
     const feedbacksCount = this.props.feedbacksPerYear;
-    console.log("fPerYear" + feedbacksCount);
 
     return (
       <View>

@@ -1,7 +1,6 @@
-// const apiHost = "http://192.168.43.95:8085";
-// const apiHost = "http://10.24.24.206:8085";
-// http://5f7d4964.ngrok.io/
-const apiHost = "http://5f7d4964.ngrok.io";
+ //const apiHost = "http://10.24.24.124:8085";
+// const apiHost = "http://145.109.160.121:8085";
+const apiHost = "http://c96cbb33.ngrok.io";
 
 export default {
   getApiHost() {
@@ -18,7 +17,7 @@ export default {
   },
   async getFeedbackDetail(feedbackId) {
     try {
-      const response = await fetch(apiHost + "/id/" + feedbackId);
+      const response = await fetch(apiHost + "/get/id/" + feedbackId);
       const responseJson = await response.json();
       return responseJson;
     } catch (error) {
