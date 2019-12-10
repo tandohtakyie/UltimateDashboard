@@ -4,7 +4,7 @@ import StatusBarAdjust from "../components/StatusBarAdjust";
 import styles from "../style";
 import Bar from "../components/Bar";
 import TACatDistr from "../components/TACatDistr";
-import TAappsSmileysVictory from "../components/TAappsSmileysVictory";
+import TAappsSmileys from "../components/TAappsSmileys";
 import LineChart from "../components/LineChart";
 import ajax from "../ajax";
 
@@ -146,9 +146,7 @@ class DashboardScreen extends Component {
                 >
                   Average rating per app
                 </Text>
-                <TAappsSmileysVictory 
-                  avgPerAppCount={avgPerAppData}
-                />
+                <TAappsSmileys/>
               </View>
             </View>
             <View style={styles.panel_Dashboard}>
