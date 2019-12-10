@@ -2,29 +2,19 @@ import React from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import { VictoryPie } from "victory-native";
 import ajax from "../ajax";
+import { PropTypes } from "prop-types";
 
 const scr = Dimensions.get("window").width;
 
 class TACatDistr extends React.PureComponent {
-  state = {
-    data: []
-  };
-
-  componentDidMount = () => {
-    fetch(ajax.getApiHost() + "/get/catDistr", { method: "GET" })
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          data: responseJson
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  static propTypes = {
+    catDistr: PropTypes.array.isRequired,
+    onListRefresh: PropTypes.bool.isRequired,
+    onPullDownRefresh: PropTypes.func.isRequired
   };
 
   render() {
-    const { data } = this.state;
+    const data = this.props.catDistr;
     const feedb = data.map((key, index) => key.feedback);
     const sugg = data.map((key, index) => key.suggestion);
     const bugr = data.map((key, index) => key.bugreport);

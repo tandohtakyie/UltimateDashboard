@@ -19,6 +19,7 @@ class DashboardScreen extends Component {
     smileys: [],
     refreshing: false,
     avgPerApp: [],
+    catDistr: []
   };
 
   componentDidMount() {
@@ -26,7 +27,21 @@ class DashboardScreen extends Component {
     this._getOsAmount();
     this._getSmileyRangeAmount();
     this._getAvgPerApp();
+    this._getCatDistr();
   }
+
+  _getCatDistr = async () => {
+    await fetch(ajax.getApiHost() + "/get/catDistr", { method: "GET" })
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState({
+          catDistr: responseJson
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
   _getAvgPerApp = async () => {
     await fetch(ajax.getApiHost() + "/getAvgPerApp", { method: "GET" })
@@ -82,6 +97,7 @@ class DashboardScreen extends Component {
 
   handleRefresh = () => {
     this.setState({ refreshing: true });
+    this._getCatDistr();
     this._getOsAmount();
     this._getSmileyRangeAmount();
     this._getAvgPerApp();
@@ -95,6 +111,7 @@ class DashboardScreen extends Component {
     const os = this.state.os;
     const smileyRange = this.state.smileys;
     const avgPerAppData = this.state.avgPerApp;
+    const catDistrData = this.state.catDistr; 
 
     return (
       <View style={[styles.container]}>
@@ -160,7 +177,11 @@ class DashboardScreen extends Component {
                 >
                   Category distribution
                 </Text>
-              <TACatDistr /> 
+              <TACatDistr
+              catDistr={catDistrData}
+              onListRefresh={this.state.refreshing}
+              onPullDownRefresh={this.handleRefresh}
+              /> 
               </View>
             </View>
           </View>
