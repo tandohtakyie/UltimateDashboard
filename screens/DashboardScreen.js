@@ -6,6 +6,7 @@ import Bar from "../components/Bar";
 import TACatDistr from "../components/TACatDistr";
 import TAappsSmileys from "../components/TAappsSmileys";
 import LineChart from "../components/LineChart";
+import PieChart from "../components/PieChart"
 import ajax from "../ajax";
 
 const apiHost = ajax.getApiHost() + "/get";
@@ -57,7 +58,7 @@ class DashboardScreen extends Component {
   };
 
   _getFeedbackAmountPerYear = async () => {
-    await fetch(apiHost + "/feedbacks/year", { method: "GET" })
+    await fetch(apiHost + "/feedbacks/year/2019", { method: "GET" })
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
@@ -150,11 +151,11 @@ class DashboardScreen extends Component {
               <Text style={[styles.text_bold, styles.text_white]}>
                 Satisfaction index
               </Text>
-                { /* <PieChartWithClickSlices 
+              <PieChart
                 smileys={smileyRange} 
                 onListRefresh={this.state.refreshing}
                 onPullDownRefresh={this.handleRefresh}
-                /> */}
+              />
             </View>
             <View style={styles.panel_Dashboard}>
               <View>

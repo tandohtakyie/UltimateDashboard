@@ -1,18 +1,16 @@
-import {PropTypes} from 'prop-types';
+import React from "react";
 import Smiley from './Smiley';
+import { Text } from 'react-native-svg';
 
 class SmileyComponent extends React.Component {
-  static propTypes = {
-    pieData: PropTypes.object.isRequired,
-  };
 
   render() {
-    const {x, y} = this.props.pieData; // VictoryPie supplies x, y and datum
-    const cat = <Smiley size={50} />;
+    const {x, y, datum} = this.props;
+    const cat = "😻" ;
     return (
-      <text x={x} y={y} fontSize={30}>
+      <Text x={20} y={30} fontSize={30}>  
         {cat}
-      </text>
+      </Text>
     );
   }
 }
