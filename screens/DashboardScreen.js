@@ -146,7 +146,11 @@ class DashboardScreen extends Component {
                 >
                   Average rating per app
                 </Text>
-                <TAappsSmileys/>
+                <TAappsSmileys
+                avgPerApp={avgPerAppData}
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh}
+                />
               </View>
             </View>
             <View style={styles.panel_Dashboard}>
