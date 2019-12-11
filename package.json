@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.3",
+    "@react-native-community/viewpager": "^3.3.0",
     "expo": "^35.0.1",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",

@@ -51,8 +51,8 @@ class PieChart extends React.PureComponent {
                       {
                         target: 'labels',
                         mutation: (props) => { 
-                          return props.text === "😻" ?
-                          null : { text: "😻" }
+                          return props.text === "😻" ? 
+                          null : { text: "😻" } 
                         },
                       },
                     ];

@@ -4,9 +4,8 @@ import { View } from "react-native";
 import { Text } from "react-native-svg";
 import { PropTypes } from "prop-types";
 import * as scale from "d3-scale";
-import ajax from "../ajax";
 
-class TAappSmileys extends React.PureComponent {
+class SmileysAvgPerApp extends React.PureComponent {
   static propTypes = {
     avgPerApp: PropTypes.array.isRequired,
     onListRefresh: PropTypes.bool.isRequired,
@@ -43,7 +42,7 @@ class TAappSmileys extends React.PureComponent {
       ));
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1}}>
         <View
           style={{
             height: 250,
@@ -104,4 +103,4 @@ class TAappSmileys extends React.PureComponent {
   }
 }
 
-export default TAappSmileys;
+export default SmileysAvgPerApp;

@@ -3,11 +3,12 @@ import { View, Text, ScrollView, RefreshControl } from "react-native";
 import StatusBarAdjust from "../components/StatusBarAdjust";
 import styles from "../style";
 import Bar from "../components/Bar";
-import TACatDistr from "../components/TACatDistr";
-import TAappsSmileys from "../components/TAappsSmileys";
+import CategoryDistr from "../components/CategoryDistr";
+import SmileysAvgPerApp from "../components/SmileysAvgPerApp";
 import LineChart from "../components/LineChart";
 import PieChart from "../components/PieChart"
 import ajax from "../ajax";
+
 
 const apiHost = ajax.getApiHost() + "/get";
 
@@ -164,7 +165,7 @@ class DashboardScreen extends Component {
                 >
                   Average rating per app
                 </Text>
-                <TAappsSmileys
+                <SmileysAvgPerApp
                 avgPerApp={avgPerAppData}
                 onListRefresh={this.state.refreshing}
                 onPullDownRefresh={this.handleRefresh}
@@ -178,7 +179,7 @@ class DashboardScreen extends Component {
                 >
                   Category distribution
                 </Text>
-              <TACatDistr
+              <CategoryDistr
               catDistr={catDistrData}
               onListRefresh={this.state.refreshing}
               onPullDownRefresh={this.handleRefresh}
