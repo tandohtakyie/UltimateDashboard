@@ -133,7 +133,7 @@ class DashboardScreen extends Component {
         >
           <View style={[styles.mlr10, styles.ptb10]}>
           <IndicatorViewPager
-          style={{ height: 450 }}
+          style={{ height: 425 }}
           indicator={this._renderLineChartsTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold]}>
@@ -147,7 +147,7 @@ class DashboardScreen extends Component {
             </View>
             </IndicatorViewPager>
             <IndicatorViewPager
-              style={{ height: 450 }}
+              style={{ height: 425 }}
               indicator={this._renderSmileyChartsTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_bold, styles.text_white]}>
@@ -173,7 +173,7 @@ class DashboardScreen extends Component {
             </View>
             </IndicatorViewPager>
             <IndicatorViewPager
-              style={{ height: 450 }}
+              style={{ height: 500 }}
               indicator={this._renderOSCatTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
