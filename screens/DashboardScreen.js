@@ -7,6 +7,10 @@ import CategoryDistr from "../components/CategoryDistr";
 import SmileysAvgPerApp from "../components/SmileysAvgPerApp";
 import LineChart from "../components/LineChart";
 import PieChart from "../components/PieChart"
+import {
+  IndicatorViewPager,
+  PagerTitleIndicator,
+} from 'rn-viewpager';
 import ajax from "../ajax";
 
 
@@ -128,9 +132,12 @@ class DashboardScreen extends Component {
           showsVerticalScrollIndicator={false}
         >
           <View style={[styles.mlr10, styles.ptb10]}>
+          <IndicatorViewPager
+          style={{ height: 450 }}
+          indicator={this._renderLineChartsTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold]}>
-                Feedback amount this year
+                Feedback amount per year
               </Text>         
                 <LineChart 
                 feedbacksPerYear={feedbacksPerYear} 
@@ -138,16 +145,10 @@ class DashboardScreen extends Component {
                 onPullDownRefresh={this.handleRefresh} 
                 />
             </View>
-            <View style={styles.panel_Dashboard}>
-              <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
-                OS distribution
-              </Text>
-                <Bar 
-                os={os}
-                onListRefresh={this.state.refreshing}
-                onPullDownRefresh={this.handleRefresh}
-                />
-            </View>
+            </IndicatorViewPager>
+            <IndicatorViewPager
+              style={{ height: 450 }}
+              indicator={this._renderSmileyChartsTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_bold, styles.text_white]}>
                 Satisfaction index
@@ -158,8 +159,7 @@ class DashboardScreen extends Component {
                 onPullDownRefresh={this.handleRefresh}
               />
             </View>
-            <View style={styles.panel_Dashboard}>
-              <View>
+            <View style={styles.panel_Dashboard}>           
                 <Text
                   style={[styles.text_white, styles.text_bold, styles.ptb10]}
                 >
@@ -170,7 +170,20 @@ class DashboardScreen extends Component {
                 onListRefresh={this.state.refreshing}
                 onPullDownRefresh={this.handleRefresh}
                 />
-              </View>
+            </View>
+            </IndicatorViewPager>
+            <IndicatorViewPager
+              style={{ height: 450 }}
+              indicator={this._renderOSCatTitleIndicator()}>
+            <View style={styles.panel_Dashboard}>
+              <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
+                OS distribution
+              </Text>
+                <Bar 
+                os={os}
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh}
+                />
             </View>
             <View style={styles.panel_Dashboard}>
               <View>
@@ -186,10 +199,20 @@ class DashboardScreen extends Component {
               /> 
               </View>
             </View>
+            </IndicatorViewPager>
           </View>
         </ScrollView>
-      </View>
+        </View>
     );
+  }
+  _renderLineChartsTitleIndicator() {
+    return <PagerTitleIndicator titles={['2019', '2020']} />;
+  }
+  _renderSmileyChartsTitleIndicator() {
+    return <PagerTitleIndicator titles={['Smiley rating', 'App rating']} />;
+  }
+  _renderOSCatTitleIndicator() {
+    return <PagerTitleIndicator titles={['Mobile OS', 'Category']} />;
   }
 }
 
