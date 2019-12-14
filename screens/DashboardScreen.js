@@ -6,12 +6,12 @@ import Bar from "../components/Bar";
 import CategoryDistr from "../components/CategoryDistr";
 import SmileysAvgPerApp from "../components/SmileysAvgPerApp";
 import LineChart from "../components/LineChart";
-import PieChart from "../components/PieChart"
 import {
   IndicatorViewPager,
   PagerTitleIndicator,
 } from 'rn-viewpager';
 import ajax from "../ajax";
+import PieChartWithClickSlices from './../components/PieChartWithClickSlices';
 
 
 const apiHost = ajax.getApiHost() + "/get";
@@ -153,7 +153,7 @@ class DashboardScreen extends Component {
               <Text style={[styles.text_bold, styles.text_white]}>
                 Satisfaction index
               </Text>
-              <PieChart
+              <PieChartWithClickSlices
                 smileys={smileyRange} 
                 onListRefresh={this.state.refreshing}
                 onPullDownRefresh={this.handleRefresh}
@@ -173,7 +173,7 @@ class DashboardScreen extends Component {
             </View>
             </IndicatorViewPager>
             <IndicatorViewPager
-              style={{ height: 500 }}
+              style={{ height: 550 }}
               indicator={this._renderOSCatTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
