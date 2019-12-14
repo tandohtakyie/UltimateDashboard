@@ -5,6 +5,10 @@ export default StyleSheet.create({
     backgroundColor: "#1d2637",
     height: "100%"
   },
+  questionContainer: {
+    backgroundColor: "#fff",
+    height: "100%"
+  },
   ptb10: {
     marginVertical: 10
   },
@@ -104,10 +108,23 @@ export default StyleSheet.create({
     paddingHorizontal: 30,
     marginLeft: 5
   },
-  btn_trash: {},
+  btnDelete: {
+    flexDirection: "row",
+    backgroundColor: "#fb3d57",
+    justifyContent: "center",
+    paddingVertical: 10,
+    borderRadius: 10
+  },
+  btnDeleteTextSize: {
+    fontSize: 14
+  },
+  btnDeletePos: {
+    marginTop: 5,
+    marginHorizontal: 10
+  },
   filterDropdown: {
     color: "#fff",
-    backgroundColor: "#181f2d",
-    height: 40
+    backgroundColor: "#33415f",
+    height: 40,
   }
 });
