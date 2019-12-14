@@ -6,7 +6,7 @@ import { PropTypes } from "prop-types";
 
 const scr = Dimensions.get("window").width;
 
-class TACatDistr extends React.PureComponent {
+class CategoryDistr extends React.PureComponent {
   static propTypes = {
     catDistr: PropTypes.array.isRequired,
     onListRefresh: PropTypes.bool.isRequired,
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TACatDistr;
+export default CategoryDistr;

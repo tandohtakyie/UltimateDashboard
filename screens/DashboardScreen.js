@@ -3,11 +3,16 @@ import { View, Text, ScrollView, RefreshControl } from "react-native";
 import StatusBarAdjust from "../components/StatusBarAdjust";
 import styles from "../style";
 import Bar from "../components/Bar";
-import TACatDistr from "../components/TACatDistr";
-import TAappsSmileys from "../components/TAappsSmileys";
+import CategoryDistr from "../components/CategoryDistr";
+import SmileysAvgPerApp from "../components/SmileysAvgPerApp";
 import LineChart from "../components/LineChart";
 import PieChart from "../components/PieChart"
+import {
+  IndicatorViewPager,
+  PagerTitleIndicator,
+} from 'rn-viewpager';
 import ajax from "../ajax";
+
 
 const apiHost = ajax.getApiHost() + "/get";
 
@@ -127,9 +132,12 @@ class DashboardScreen extends Component {
           showsVerticalScrollIndicator={false}
         >
           <View style={[styles.mlr10, styles.ptb10]}>
+          <IndicatorViewPager
+          style={{ height: 425 }}
+          indicator={this._renderLineChartsTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold]}>
-                Feedback amount this year
+                Feedback amount per year
               </Text>         
                 <LineChart 
                 feedbacksPerYear={feedbacksPerYear} 
@@ -137,6 +145,36 @@ class DashboardScreen extends Component {
                 onPullDownRefresh={this.handleRefresh} 
                 />
             </View>
+            </IndicatorViewPager>
+            <IndicatorViewPager
+              style={{ height: 425 }}
+              indicator={this._renderSmileyChartsTitleIndicator()}>
+            <View style={styles.panel_Dashboard}>
+              <Text style={[styles.text_bold, styles.text_white]}>
+                Satisfaction index
+              </Text>
+              <PieChart
+                smileys={smileyRange} 
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh}
+              />
+            </View>
+            <View style={styles.panel_Dashboard}>           
+                <Text
+                  style={[styles.text_white, styles.text_bold, styles.ptb10]}
+                >
+                  Average rating per app
+                </Text>
+                <SmileysAvgPerApp
+                avgPerApp={avgPerAppData}
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh}
+                />
+            </View>
+            </IndicatorViewPager>
+            <IndicatorViewPager
+              style={{ height: 500 }}
+              indicator={this._renderOSCatTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
                 OS distribution
@@ -148,47 +186,33 @@ class DashboardScreen extends Component {
                 />
             </View>
             <View style={styles.panel_Dashboard}>
-              <Text style={[styles.text_bold, styles.text_white]}>
-                Satisfaction index
-              </Text>
-              <PieChart
-                smileys={smileyRange} 
-                onListRefresh={this.state.refreshing}
-                onPullDownRefresh={this.handleRefresh}
-              />
-            </View>
-            <View style={styles.panel_Dashboard}>
-              <View>
-                <Text
-                  style={[styles.text_white, styles.text_bold, styles.ptb10]}
-                >
-                  Average rating per app
-                </Text>
-                <TAappsSmileys
-                avgPerApp={avgPerAppData}
-                onListRefresh={this.state.refreshing}
-                onPullDownRefresh={this.handleRefresh}
-                />
-              </View>
-            </View>
-            <View style={styles.panel_Dashboard}>
               <View>
                 <Text
                   style={[styles.text_bold, styles.text_white, styles.ptb10]}
                 >
                   Category distribution
                 </Text>
-              <TACatDistr
+              <CategoryDistr
               catDistr={catDistrData}
               onListRefresh={this.state.refreshing}
               onPullDownRefresh={this.handleRefresh}
               /> 
               </View>
             </View>
+            </IndicatorViewPager>
           </View>
         </ScrollView>
-      </View>
+        </View>
     );
+  }
+  _renderLineChartsTitleIndicator() {
+    return <PagerTitleIndicator titles={['2019', '2020']} />;
+  }
+  _renderSmileyChartsTitleIndicator() {
+    return <PagerTitleIndicator titles={['Smiley rating', 'App rating']} />;
+  }
+  _renderOSCatTitleIndicator() {
+    return <PagerTitleIndicator titles={['Mobile OS', 'Category']} />;
   }
 }
 
