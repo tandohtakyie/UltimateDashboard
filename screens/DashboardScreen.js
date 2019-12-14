@@ -4,9 +4,13 @@ import StatusBarAdjust from "../components/StatusBarAdjust";
 import styles from "../style";
 import Bar from "../components/Bar";
 import PieChartWithClickSlices from "../components/PieChartWithClickSlices";
-import TACatDistr from "../components/TACatDistr";
-import TAappSmileys from "../components/TAappsSmileys";
+import CategoryDistr from "../components/CategoryDistr";
+import SmileysAvgPerApp from "../components/SmileysAvgPerApp";
 import LineChart from "../components/LineChart";
+import {
+  IndicatorViewPager,
+  PagerTitleIndicator,
+} from 'rn-viewpager';
 import ajax from "../ajax";
 
 const apiHost = ajax.getApiHost() + "/get";
@@ -18,17 +22,47 @@ class DashboardScreen extends Component {
     os: [],
     loading: false,
     smileys: [],
-    refreshing: false
+    refreshing: false,
+    avgPerApp: [],
+    catDistr: []
   };
 
   componentDidMount() {
     this._getFeedbackAmountPerYear();
     this._getOsAmount();
     this._getSmileyRangeAmount();
+    this._getAvgPerApp();
+    this._getCatDistr();
   }
 
+  _getCatDistr = async () => {
+    await fetch(ajax.getApiHost() + "/get/catDistr", { method: "GET" })
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState({
+          catDistr: responseJson
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  _getAvgPerApp = async () => {
+    await fetch(ajax.getApiHost() + "/getAvgPerApp", { method: "GET" })
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState({
+          avgPerApp: responseJson
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   _getFeedbackAmountPerYear = async () => {
-    fetch(apiHost + "/feedbacks/year", { method: "GET" })
+    fetch(apiHost + "/feedbacks/year/2019", { method: "GET" })
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
@@ -68,8 +102,10 @@ class DashboardScreen extends Component {
 
   handleRefresh = () => {
     this.setState({ refreshing: true });
+    this._getCatDistr();
     this._getOsAmount();
     this._getSmileyRangeAmount();
+    this._getAvgPerApp();
     this._getFeedbackAmountPerYear().then(() => {
       this.setState({ refreshing: false });
     });
@@ -81,6 +117,8 @@ class DashboardScreen extends Component {
     console.log("osDashboardscreen: " + os);
     console.log("feedbackPerYear: " + feedbacksPerYear);
     const smileyRange = this.state.smileys;
+    const avgPerAppData = this.state.avgPerApp;
+    const catDistrData = this.state.catDistr;
 
     return (
       <View style={[styles.container]}>
@@ -100,25 +138,24 @@ class DashboardScreen extends Component {
                 Feedback amount this year
               </Text>
               <View>
-                <LineChart feedbacksPerYear={feedbacksPerYear} />
+                <LineChart 
+                feedbacksPerYear={feedbacksPerYear}
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh} />
               </View>
             </View>
-            <View style={styles.panel_Dashboard}>
-              <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
-                OS distribution
-              </Text>
-              {this.state.os.length > 0 ? (
-                <Bar os={os} />
-              ) : (
-                <Text style={styles.text_white_opacity}>No data available</Text>
-              )}
-            </View>
+          <IndicatorViewPager
+              style={{ height: 425 }}
+              indicator={this._renderSmileyChartsTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_bold, styles.text_white]}>
                 Satisfaction index
               </Text>
               {this.state.smileys.length > 0 ? (
-                <Text>PieChartWithClickSlices will come here</Text>
+                <PieChartWithClickSlices 
+                smileys={smileyRange}
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh}/>
               ) : (
                 <Text style={styles.text_white_opacity}>No data available</Text>
               )}
@@ -130,8 +167,28 @@ class DashboardScreen extends Component {
                 >
                   Average rating per app
                 </Text>
-                <TAappSmileys />
+                <SmileysAvgPerApp 
+                avgPerApp={avgPerAppData}
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh} />
               </View>
+            </View>
+          </IndicatorViewPager>
+          <IndicatorViewPager
+              style={{ height: 550 }}
+              indicator={this._renderSmileyChartsTitleIndicator()}>
+                <View style={styles.panel_Dashboard}>
+              <Text style={[styles.text_white, styles.text_bold, styles.ptb10]}>
+                OS distribution
+              </Text>
+              {this.state.os.length > 0 ? (
+                <Bar 
+                os={os}
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh} />
+              ) : (
+                <Text style={styles.text_white_opacity}>No data available</Text>
+              )}
             </View>
             <View style={styles.panel_Dashboard}>
               <View>
@@ -140,14 +197,29 @@ class DashboardScreen extends Component {
                 >
                   Category distribution
                 </Text>
-                <TACatDistr />
+                <CategoryDistr 
+                catDistr={catDistrData}
+                onListRefresh={this.state.refreshing}
+                onPullDownRefresh={this.handleRefresh} />
               </View>
             </View>
+            </IndicatorViewPager>
           </View>
         </ScrollView>
       </View>
     );
   }
+
+  _renderLineChartsTitleIndicator() {
+    return <PagerTitleIndicator titles={['2019', '2020']} />;
+  }
+  _renderSmileyChartsTitleIndicator() {
+    return <PagerTitleIndicator titles={['Smiley rating', 'App rating']} />;
+  }
+  _renderOSCatTitleIndicator() {
+    return <PagerTitleIndicator titles={['Mobile OS', 'Category']} />;
+  }
+
 }
 
 export default DashboardScreen;

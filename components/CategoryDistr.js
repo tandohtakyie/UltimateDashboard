@@ -2,33 +2,23 @@ import React from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import { VictoryPie } from "victory-native";
 import ajax from "../ajax";
+import { PropTypes } from "prop-types";
 
 const scr = Dimensions.get("window").width;
 
-class TACatDistr extends React.PureComponent {
-  state = {
-    data: []
-  };
-
-  componentDidMount = () => {
-    fetch(ajax.getApiHost() + "/get/catDistr", { method: "GET" })
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          data: responseJson
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+class CategoryDistr extends React.PureComponent {
+  static propTypes = {
+    catDistr: PropTypes.array.isRequired,
+    onListRefresh: PropTypes.bool.isRequired,
+    onPullDownRefresh: PropTypes.func.isRequired
   };
 
   render() {
-    const { data } = this.state;
-
+    const data = this.props.catDistr;
     const feedb = data.map((key, index) => key.feedback);
     const sugg = data.map((key, index) => key.suggestion);
     const bugr = data.map((key, index) => key.bugreport);
+
 
     // calculate total count and then percentages
     const max = parseInt(feedb) + parseInt(sugg) + parseInt(bugr);
@@ -39,6 +29,7 @@ class TACatDistr extends React.PureComponent {
     return (
       <View style={{ width: scr, position: "relative" }}>
         <View style={{ width: scr * 0.85, marginLeft: -10 }}>
+        {data.length !== 0 ? (
           <VictoryPie
             data={[
               { x: " ", y: feedb[0] },
@@ -50,6 +41,9 @@ class TACatDistr extends React.PureComponent {
             labelRadius={100}
             colorScale={["turquoise", "lightgray", "#cc99ff"]}
           />
+          ) : (
+            <Text> No data to display </Text>
+          )}
         </View>
         <View
           style={{
@@ -116,4 +110,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TACatDistr;
+export default CategoryDistr;

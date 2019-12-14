@@ -2,30 +2,18 @@ import React from "react";
 import { BarChart, XAxis, YAxis, Grid } from "react-native-svg-charts";
 import { View } from "react-native";
 import { Text } from "react-native-svg";
+import { PropTypes } from "prop-types";
 import * as scale from "d3-scale";
-import ajax from "../ajax";
 
-class TAappSmileys extends React.PureComponent {
-  state = {
-    data: []
-  };
-
-  componentDidMount = () => {
-    fetch(ajax.getApiHost() + "/getAvgPerApp", { method: "GET" })
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({
-          data: responseJson
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+class SmileysAvgPerApp extends React.PureComponent {
+  static propTypes = {
+    avgPerApp: PropTypes.array.isRequired,
+    onListRefresh: PropTypes.bool.isRequired,
+    onPullDownRefresh: PropTypes.func.isRequired
   };
 
   render() {
-    const { data } = this.state;
-    //console.log(data);
+    const data  = this.props.avgPerApp;
 
     const app = data.map((key, index) => key.app);
     const avg = data.map((key, index) => key.avg);
@@ -54,7 +42,7 @@ class TAappSmileys extends React.PureComponent {
       ));
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1}}>
         <View
           style={{
             height: 250,
@@ -115,4 +103,4 @@ class TAappSmileys extends React.PureComponent {
   }
 }
 
-export default TAappSmileys;
+export default SmileysAvgPerApp;

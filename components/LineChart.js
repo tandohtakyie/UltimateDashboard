@@ -5,7 +5,7 @@ import {
   VictoryTheme,
   VictoryVoronoiContainer,
   VictoryScatter,
-  VictoryTooltip
+  VictoryTooltip,
 } from "victory-native";
 import { PropTypes } from "prop-types";
 import { Text, View } from "react-native";
@@ -19,7 +19,20 @@ class LineChart extends React.PureComponent {
 
   render() {
     const feedbacksCount = this.props.feedbacksPerYear;
-    console.log("fPerYear" + feedbacksCount);
+    const data =[
+      { x: "Jan", y: feedbacksCount[0] },
+      { x: "Feb", y: feedbacksCount[1] },
+      { x: "Mar", y: feedbacksCount[2] },
+      { x: "Apr", y: feedbacksCount[3] },
+      { x: "May", y: feedbacksCount[4] },
+      { x: "Jun", y: feedbacksCount[5] },
+      { x: "Jul", y: feedbacksCount[6] },
+      { x: "Aug", y: feedbacksCount[7] },
+      { x: "Sep", y: feedbacksCount[8] },
+      { x: "Oct", y: feedbacksCount[9] },
+      { x: "Nov", y: feedbacksCount[10] },
+      { x: "Dec", y: feedbacksCount[11] }
+    ]
 
     return (
       <View>
@@ -50,20 +63,7 @@ class LineChart extends React.PureComponent {
                     "Dec"
                   ]
                 }}
-                data={[
-                  { x: "Jan", y: feedbacksCount[0] },
-                  { x: "Feb", y: feedbacksCount[1] },
-                  { x: "Mar", y: feedbacksCount[2] },
-                  { x: "Apr", y: feedbacksCount[3] },
-                  { x: "May", y: feedbacksCount[4] },
-                  { x: "Jun", y: feedbacksCount[5] },
-                  { x: "Jul", y: feedbacksCount[6] },
-                  { x: "Aug", y: feedbacksCount[7] },
-                  { x: "Sep", y: feedbacksCount[8] },
-                  { x: "Oct", y: feedbacksCount[9] },
-                  { x: "Nov", y: feedbacksCount[10] },
-                  { x: "Dec", y: feedbacksCount[11] }
-                ]}
+                data={data}
               />
             ) : (
               <Text> No data to display </Text>
@@ -73,20 +73,7 @@ class LineChart extends React.PureComponent {
                 style={{ data: { fill: "#ab34eb" } }}
                 size={5}
                 labelComponent={<VictoryTooltip constrainToVisibleArea />}
-                data={[
-                  { x: "Jan", y: feedbacksCount[0] },
-                  { x: "Feb", y: feedbacksCount[1] },
-                  { x: "Mar", y: feedbacksCount[2] },
-                  { x: "Apr", y: feedbacksCount[3] },
-                  { x: "May", y: feedbacksCount[4] },
-                  { x: "Jun", y: feedbacksCount[5] },
-                  { x: "Jul", y: feedbacksCount[6] },
-                  { x: "Aug", y: feedbacksCount[7] },
-                  { x: "Sep", y: feedbacksCount[8] },
-                  { x: "Oct", y: feedbacksCount[9] },
-                  { x: "Nov", y: feedbacksCount[10] },
-                  { x: "Dec", y: feedbacksCount[11] }
-                ]}
+                data={data}
                 labels={({ datum }) => datum.y}
               />
             ) : (
