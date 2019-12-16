@@ -206,13 +206,22 @@ class DashboardScreen extends Component {
     );
   }
   _renderLineChartsTitleIndicator() {
-    return <PagerTitleIndicator titles={['2019', '2020']} />;
+    return <PagerTitleIndicator 
+            itemTextStyle={{color: 'white'}}
+            style={{backgroundColor:'#6f81a3'}} 
+            titles={['2019', '2020']} />;
   }
   _renderSmileyChartsTitleIndicator() {
-    return <PagerTitleIndicator titles={['Smiley rating', 'App rating']} />;
+    return <PagerTitleIndicator 
+            itemTextStyle={{color: 'white'}}
+            style={{backgroundColor:'#6f81a3'}} 
+            titles={['Smiley rating', 'App rating']} />;
   }
   _renderOSCatTitleIndicator() {
-    return <PagerTitleIndicator titles={['Mobile OS', 'Category']} />;
+    return <PagerTitleIndicator 
+            itemTextStyle={{color: 'white'}}
+            titles={['Mobile OS', 'Category']}
+            style={{backgroundColor:'#6f81a3'}} />;
   }
 }
 
