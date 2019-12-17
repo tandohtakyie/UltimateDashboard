@@ -132,9 +132,6 @@ class DashboardScreen extends Component {
           showsVerticalScrollIndicator={false}
         >
           <View style={[styles.mlr10, styles.ptb10]}>
-          <IndicatorViewPager
-          style={{ height: 425 }}
-          indicator={this._renderLineChartsTitleIndicator()}>
             <View style={styles.panel_Dashboard}>
               <Text style={[styles.text_white, styles.text_bold]}>
                 Feedback amount per year
@@ -145,7 +142,6 @@ class DashboardScreen extends Component {
                 onPullDownRefresh={this.handleRefresh} 
                 />
             </View>
-            </IndicatorViewPager>
             <IndicatorViewPager
               style={{ height: 550 }}
               indicator={this._renderSmileyChartsTitleIndicator()}>

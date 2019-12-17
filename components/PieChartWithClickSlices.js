@@ -121,21 +121,6 @@ class PieChartWithClickSlices extends React.PureComponent {
           <View style={{ flexDirection: "row" }}>
             <View style={styles.boxes}>
             <Image
-              style={{width: 20, height: 20, marginTop: 7 }}
-              source={require('../assets/SmileyRange1.png')}  
-            /> 
-            <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      backgroundColor: "#580085",
-                      marginTop: 7
-                    }}
-                  />
-                  <Text style={styles.text}>Miserable</Text>
-            </View>
-            <View style={styles.boxes}>
-            <Image
               style={{width: 23, height: 23, marginTop: 7 }}
               source={require('../assets/SmileyRange10.png')}  
             /> 
@@ -148,6 +133,21 @@ class PieChartWithClickSlices extends React.PureComponent {
                     }}
                   />
                   <Text style={styles.text}>Excellent</Text>
+            </View>
+            <View style={styles.boxes}>
+            <Image
+              style={{width: 20, height: 20, marginTop: 7 }}
+              source={require('../assets/SmileyRange1.png')}  
+            /> 
+            <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      backgroundColor: "#580085",
+                      marginTop: 7
+                    }}
+                  />
+                  <Text style={styles.text}>Miserable</Text>
             </View>
           </View>
       </View>

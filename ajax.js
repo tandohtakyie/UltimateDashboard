@@ -1,6 +1,6 @@
-const apiHost = "http://10.30.0.27:8085";
+const apiHost = "http://10.24.24.244:8085";
 // const apiHost = "http://145.109.160.121:8085";
-//const apiHost = "http://e8478526.ngrok.io";
+//const apiHost = "http://daf2e285.ngrok.io";
 
 export default {
   getApiHost() {
